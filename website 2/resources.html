@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources & Downloads — Sovereign Misfit Farm</title>
+<meta name="description" content="Free, open-source resources to launch your own community land trust. The Manifesto, Blueprint, Starter Guide, and more.">
+<meta name="keywords" content="community land trust resources, open source, governance templates, farming guides, intentional community">
+<meta property="og:title" content="Resources & Downloads — Sovereign Misfit Farm">
+<meta property="og:description" content="Free, open-source resources to launch your own community land trust.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.sovereignmisfitfarm.com/resources">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --earth-green: #2D5016;
+    --forest: #1A3A0A;
+    --sage: #7A9B6D;
+    --moss: #4A7A3A;
+    --warm-brown: #6B3A2A;
+    --clay: #A0674E;
+    --gold: #8B7D3C;
+    --wheat: #C4A84B;
+    --cream: #F5F0E0;
+    --linen: #FAF7F0;
+    --parchment: #EDE8D8;
+    --charcoal: #2C2C2C;
+    --dark-soil: #3A2E24;
+    --stone: #666666;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--linen);
+    color: var(--charcoal);
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 0.75rem 2rem; display: flex; justify-content: space-between; align-items: center; background: rgba(26,58,10,0.97); backdrop-filter: blur(10px); box-shadow: 0 2px 20px rgba(0,0,0,0.2); }
+  .nav-logo { font-family: 'Playfair Display', serif; color: var(--wheat); font-size: 1.15rem; font-weight: 700; text-decoration: none; }
+  .nav-top-links { display: flex; align-items: center; gap: 0; }
+  .nav-top-links a { color: var(--cream); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; opacity: 0.85; transition: opacity 0.3s; }
+  .nav-top-links a:hover, .nav-top-links a.active { opacity: 1; color: var(--wheat); }
+  .menu-btn { background: none; border: 1px solid rgba(245,240,224,0.3); border-radius: 8px; padding: 0.4rem 0.9rem; color: var(--cream); font-family: 'Source Sans 3', sans-serif; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; margin-left: 1.5rem; transition: all 0.3s; }
+  .menu-btn:hover { border-color: var(--wheat); color: var(--wheat); }
+  .menu-btn svg { width: 16px; height: 16px; }
+  .menu-btn.open { background: rgba(245,240,224,0.1); border-color: var(--wheat); }
+  .nav-dropdown { display: none; position: absolute; top: 100%; right: 1rem; background: var(--forest); border: 1px solid rgba(245,240,224,0.1); border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.3); padding: 1rem 0; min-width: 220px; }
+  .nav-dropdown.open { display: block; }
+  .nav-dropdown .dd-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sage); padding: 0.5rem 1.25rem 0.25rem; }
+  .nav-dropdown a { display: block; color: var(--cream); text-decoration: none; padding: 0.5rem 1.25rem; font-size: 0.95rem; transition: background 0.2s; }
+  .nav-dropdown a:hover { background: rgba(245,240,224,0.07); color: var(--wheat); }
+  .nav-dropdown a.active { color: var(--wheat); font-weight: 600; }
+  .nav-dropdown .dd-sep { height: 1px; background: rgba(245,240,224,0.08); margin: 0.5rem 0; }
+  @media (max-width: 768px) {
+    .nav-top-links { display: none; }
+    .nav-dropdown { left: 1rem; right: 1rem; min-width: unset; }
+  }
+
+  /* ===== HERO (SMALLER) ===== */
+  .hero {
+    min-height: 60vh;
+    background: linear-gradient(170deg, var(--forest) 0%, var(--earth-green) 40%, var(--warm-brown) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+    margin-top: 3rem;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(122, 155, 109, 0.15) 0%, transparent 70%);
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    color: var(--cream);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.3s forwards;
+  }
+  .hero p {
+    color: rgba(245, 240, 224, 0.85);
+    font-size: 1.15rem;
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.5s forwards;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== SCROLL REVEAL ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== SECTIONS ===== */
+  section { padding: 6rem 2rem; }
+  .container { max-width: 1000px; margin: 0 auto; }
+  .section-label {
+    display: inline-block;
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--earth-green);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  .lead {
+    font-size: 1.15rem;
+    color: var(--stone);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  /* ===== PRIMARY DOCUMENTS ===== */
+  .documents { background: var(--cream); }
+  .primary-docs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 2.5rem 0;
+  }
+  .doc-card {
+    background: var(--linen);
+    border: 1px solid var(--parchment);
+    border-radius: 0.5rem;
+    padding: 2.5rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+  .doc-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+  }
+  .doc-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    height: 50px;
+    display: flex;
+    align-items: center;
+  }
+  .doc-card h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--earth-green);
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+  .doc-card p {
+    color: var(--stone);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+  .doc-download {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .doc-btn {
+    display: inline-block;
+    background: var(--wheat);
+    color: var(--forest);
+    padding: 0.85rem 1.75rem;
+    border: none;
+    border-radius: 0.3rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    font-family: 'Source Sans 3', sans-serif;
+    transition: all 0.3s;
+  }
+  .doc-btn:hover {
+    background: var(--cream);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  }
+  .doc-type {
+    display: inline-block;
+    background: rgba(45, 80, 22, 0.08);
+    color: var(--earth-green);
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ===== ADDITIONAL RESOURCES ===== */
+  .additional-resources { background: var(--linen); }
+  .resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .resource-item {
+    background: var(--cream);
+    border: 1px solid var(--parchment);
+    border-radius: 0.3rem;
+    padding: 1.75rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .resource-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  }
+  .resource-item h4 {
+    font-family: 'Playfair Display', serif;
+    color: var(--earth-green);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+  .resource-item a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--wheat);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: gap 0.2s;
+  }
+  .resource-item a:hover {
+    gap: 0.75rem;
+  }
+  .resource-item a::after {
+    content: '↓';
+    font-weight: bold;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--dark-soil);
+    color: rgba(245, 240, 224, 0.5);
+    text-align: center;
+    padding: 3rem 2rem;
+    font-size: 0.85rem;
+  }
+  footer a { color: var(--wheat); text-decoration: none; }
+  .footer-logo { margin: 0 auto 1rem; width: 48px; height: 48px; opacity: 0.6; }
+  .footer-logo svg { width: 100%; height: 100%; }
+  .footer-name {
+    font-family: 'Playfair Display', serif;
+    color: var(--cream);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  .footer-links {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    color: rgba(245, 240, 224, 0.5);
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--wheat); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    nav { padding: 0.8rem 1.2rem; }
+    .hamburger { display: flex; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(26, 58, 10, 0.98);
+      flex-direction: column;
+      padding: 1.5rem;
+      gap: 0;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a {
+      margin: 0;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(245, 240, 224, 0.1);
+      font-size: 1.05rem;
+    }
+    .nav-links a:last-child { border-bottom: none; }
+    .nav-links a.active { border-bottom: 2px solid var(--wheat); }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 6rem 1.5rem 3rem; margin-top: 2.5rem; }
+    .hero h1 { font-size: 1.8rem; }
+    .hero p { font-size: 1rem; }
+    .primary-docs {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 1.5rem; }
+    .nav-logo { font-size: 1rem; }
+    .nav-logo-wrap svg { width: 28px; height: 28px; }
+    .doc-card { padding: 1.75rem; }
+    .resource-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Sovereign Misfit Farm</a>
+  <div class="nav-top-links">
+    <a href="index.html">Home</a>
+    <a href="apply.html">Apply</a>
+    <a href="farmer-legacy.html">Farmer Legacy</a>
+    <a href="build-diary.html">Build Diary</a>
+    <button class="menu-btn" onclick="document.querySelector('.nav-dropdown').classList.toggle('open');this.classList.toggle('open')">
+      <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      More
+    </button>
+  </div>
+  <div class="nav-dropdown">
+    <div class="dd-label">Explore</div>
+    <a href="community-map.html">Interactive Map</a>
+    <a href="resources.html" class="active">Resources</a>
+    <div class="dd-sep"></div>
+    <div class="dd-label">Tools</div>
+    <a href="calculator.html">Land Calculator</a>
+    <a href="land-scout.html">Land Scout</a>
+    <a href="catalyst-model.html">The Catalyst Model</a>
+    <a href="farmer-legacy.html">Farmer Legacy</a>
+    <a href="apply.html">Household Application</a>
+    <div class="dd-sep"></div>
+    <div class="dd-label">Follow Along</div>
+    <a href="build-diary.html">Build Diary</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Resources & Downloads</h1>
+    <p>Everything you need to start your own Sovereign Misfit Farm — open source, free forever.</p>
+  </div>
+</section>
+
+<!-- PRIMARY DOCUMENTS -->
+<section class="documents">
+  <div class="container reveal">
+    <span class="section-label">Core Documents</span>
+    <h2>The essentials to get started.</h2>
+    <p class="lead">Four foundational documents that form the backbone of the Sovereign Misfit Farm model. Start with The Manifesto, then dive into the details.</p>
+
+    <div class="primary-docs">
+      <!-- Manifesto -->
+      <div class="doc-card">
+        <div class="doc-icon">📖</div>
+        <h3>The Manifesto</h3>
+        <p>The vision, the philosophy, the why behind everything. Start here. This is the declaration of principles that forms the foundation of who we are and what we believe community can be.</p>
+        <div class="doc-download">
+          <a href="docs/SMF_Manifesto_V2.docx" class="doc-btn" download onclick="trackDownload('SMF_Manifesto_V2.docx')">Download</a>
+          <span class="doc-type">DOCX</span>
+        </div>
+      </div>
+
+      <!-- Blueprint -->
+      <div class="doc-card">
+        <div class="doc-icon">🏗️</div>
+        <h3>The Blueprint</h3>
+        <p>The complete operational guide — governance, land use, finances, and legal structure. Everything you need to understand how the system works, broken down into actionable pieces.</p>
+        <div class="doc-download">
+          <a href="docs/SMF_Blueprint_V2.docx" class="doc-btn" download onclick="trackDownload('SMF_Blueprint_V2.docx')">Download</a>
+          <span class="doc-type">DOCX</span>
+        </div>
+      </div>
+
+      <!-- Starter Guide -->
+      <div class="doc-card">
+        <div class="doc-icon">🌱</div>
+        <h3>The Starter Guide</h3>
+        <p>Step-by-step instructions for launching your own community land trust. A practical roadmap from first meeting to first harvest, with checklists and decision points at every stage.</p>
+        <div class="doc-download">
+          <a href="docs/SMF_Starter_Guide.docx" class="doc-btn" download onclick="trackDownload('SMF_Starter_Guide.docx')">Download</a>
+          <span class="doc-type">DOCX</span>
+        </div>
+      </div>
+
+      <!-- Community Layout Map -->
+      <div class="doc-card">
+        <div class="doc-icon">🗺️</div>
+        <h3>Community Layout Map</h3>
+        <p>Interactive example of how 12 households share 40+ acres. Visualize the spaces — private dwellings, common house, gardens, forest, grazing areas — and understand the balance between privacy and shared resources.</p>
+        <div class="doc-download">
+          <a href="docs/SMF_Community_Layout.html" class="doc-btn" download onclick="trackDownload('SMF_Community_Layout.html')">Open</a>
+          <span class="doc-type">HTML</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADDITIONAL RESOURCES -->
+<section class="additional-resources">
+  <div class="container reveal">
+    <span class="section-label">Supporting Resources</span>
+    <h2>Governance, operations, and planning templates.</h2>
+    <p class="lead">Ready-to-use documents covering legal structure, governance roles, farm operations, financial models, and community building — all tested and open source.</p>
+
+    <div class="resource-grid">
+      <div class="resource-item">
+        <h4>Founding Covenant</h4>
+        <a href="docs/SMF_Founding_Covenant_V2.docx" download onclick="trackDownload('SMF_Founding_Covenant_V2.docx')">SMF_Founding_Covenant_V2.docx</a>
+      </div>
+      <div class="resource-item">
+        <h4>Legal Structure Memo</h4>
+        <a href="docs/SMF_Legal_Structure_Memo.docx" download onclick="trackDownload('SMF_Legal_Structure_Memo.docx')">SMF_Legal_Structure_Memo.docx</a>
+      </div>
+      <div class="resource-item">
+        <h4>Governance Templates</h4>
+        <a href="docs/SMF_Governance_Templates.docx" download onclick="trackDownload('SMF_Governance_Templates.docx')">SMF_Governance_Templates.docx</a>
+      </div>
+      <div class="resource-item">
+        <h4>Council Roles</h4>
+        <a href="docs/SMF_Council_Roles.docx" download onclick="trackDownload('SMF_Council_Roles.docx')">SMF_Council_Roles.docx</a>
+      </div>
+      <div class="resource-item">
+        <h4>Farm Operations Manual</h4>
+        <a href="docs/SMF_Farm_Operations_Manual.docx" download onclick="trackDownload('SMF_Farm_Operations_Manual.docx')">SMF_Farm_Operations_Manual.docx</a>
+      </div>
+      <div class="resource-item">
+        <h4>Emergency Binder</h4>
+        <a href="docs/SMF_Emergency_Binder.docx" download onclick="trackDownload('SMF_Emergency_Binder.docx')">SMF_Emergency_Binder.docx</a>
+      </div>
+      <div class="resource-item">
+        <h4>Onboarding Packet</h4>
+        <a href="docs/SMF_Onboarding_Packet.docx" download onclick="trackDownload('SMF_Onboarding_Packet.docx')">SMF_Onboarding_Packet.docx</a>
+      </div>
+      <div class="resource-item">
+        <h4>Recruitment Guide</h4>
+        <a href="docs/SMF_Recruitment_Guide.docx" download onclick="trackDownload('SMF_Recruitment_Guide.docx')">SMF_Recruitment_Guide.docx</a>
+      </div>
+      <div class="resource-item">
+        <h4>Financial Model (10-Year, 3 Scenarios)</h4>
+        <a href="docs/SMF_Financial_Model.xlsx" download onclick="trackDownload('SMF_Financial_Model.xlsx')">SMF_Financial_Model.xlsx</a>
+      </div>
+      <div class="resource-item">
+        <h4>Investor Pitch Deck</h4>
+        <a href="docs/SMF_Pitch_Deck.pptx" download onclick="trackDownload('SMF_Pitch_Deck.pptx')">SMF_Pitch_Deck.pptx</a>
+      </div>
+      <div class="resource-item">
+        <h4>Vision Statement</h4>
+        <a href="docs/SMF_Vision_Statement.md" download onclick="trackDownload('SMF_Vision_Statement.md')">SMF_Vision_Statement.md</a>
+      </div>
+      <div class="resource-item">
+        <h4>Implementation Toolkit</h4>
+        <a href="docs/SMF_Implementation_Toolkit.xlsx" download onclick="trackDownload('SMF_Implementation_Toolkit.xlsx')">SMF_Implementation_Toolkit.xlsx</a>
+      </div>
+      <div class="resource-item">
+        <h4>Town Evaluation Scorecard</h4>
+        <a href="docs/SMF_Town_Evaluation.xlsx" download onclick="trackDownload('SMF_Town_Evaluation.xlsx')">SMF_Town_Evaluation.xlsx</a>
+      </div>
+      <div class="resource-item">
+        <h4>Brand Identity Kit</h4>
+        <a href="docs/SMF_Brand_Identity_Kit.html" download onclick="trackDownload('SMF_Brand_Identity_Kit.html')">SMF_Brand_Identity_Kit.html</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="90" fill="none" stroke="#C4A84B" stroke-width="2" opacity="0.4"/>
+      <g fill="#C4A84B" opacity="0.5">
+        <circle cx="100" cy="15" r="4"/><circle cx="142.5" cy="22.5" r="4"/>
+        <circle cx="177.5" cy="57.5" r="4"/><circle cx="185" cy="100" r="4"/>
+        <circle cx="177.5" cy="142.5" r="4"/><circle cx="142.5" cy="177.5" r="4"/>
+        <circle cx="100" cy="185" r="4"/><circle cx="57.5" cy="177.5" r="4"/>
+        <circle cx="22.5" cy="142.5" r="4"/><circle cx="15" cy="100" r="4"/>
+        <circle cx="22.5" cy="57.5" r="4"/><circle cx="57.5" cy="22.5" r="4"/>
+      </g>
+      <g stroke="rgba(245,240,224,0.5)" fill="none" stroke-width="2" stroke-linecap="round">
+        <line x1="100" y1="110" x2="100" y2="70"/>
+        <line x1="100" y1="85" x2="80" y2="60"/><line x1="100" y1="85" x2="120" y2="60"/>
+        <line x1="100" y1="75" x2="88" y2="50"/><line x1="100" y1="75" x2="112" y2="50"/>
+      </g>
+      <g stroke="#C4A84B" fill="none" stroke-width="1.5" stroke-linecap="round" opacity="0.5">
+        <path d="M100,110 Q95,125 85,140"/><path d="M100,110 Q100,130 100,145"/>
+        <path d="M100,110 Q105,125 115,140"/>
+      </g>
+    </svg>
+  </div>
+  <div class="footer-name">Sovereign Misfit Farm</div>
+  <p>An open-source community land trust model.</p>
+  <p style="margin-top: 0.5rem;">Twelve households. Shared land. Sovereign lives.</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="resources.html">Resources</a>
+    <a href="calculator.html">Land Calculator</a>
+    <a href="community-map.html">Map</a>
+    <a href="land-scout.html">Land Scout</a>
+    <a href="catalyst-model.html">Catalyst Model</a>
+    <a href="farmer-legacy.html">Farmer Legacy</a>
+    <a href="apply.html">Apply</a>
+    <a href="build-diary.html">Build Diary</a>
+    <a href="mailto:info@sovereignmisfitfarm.com">Contact</a>
+  </div>
+  <p style="margin-top: 2rem; font-size: 0.75rem; opacity: 0.4;">&copy; 2026 Sovereign Misfit Farm Community Land Trust</p>
+</footer>
+
+<script>
+  // Scroll reveal animations
+  const revealElements = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  revealElements.forEach(el => revealObserver.observe(el));
+
+  // Download tracking function
+  function trackDownload(filename) {
+    fetch('https://formspree.io/f/mjgaabyj', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        _subject: 'Download: ' + filename,
+        document: filename,
+        action: 'download',
+        timestamp: new Date().toISOString()
+      })
+    }).catch(() => {});
+    return true;
+  }
+</script>
+</body>
+</html>

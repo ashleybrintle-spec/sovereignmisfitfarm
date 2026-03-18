@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build Diary — Sovereign Misfit Farm</title>
+<meta name="description" content="Follow the real journey of building a community land trust from scratch. Land scouting, numbers, mistakes, and progress — documented transparently.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --earth-green: #2D5016;
+    --forest: #1A3A0A;
+    --sage: #7A9B6D;
+    --moss: #4A7A3A;
+    --warm-brown: #6B3A2A;
+    --clay: #A0674E;
+    --gold: #8B7D3C;
+    --wheat: #C4A84B;
+    --cream: #F5F0E0;
+    --linen: #FAF7F0;
+    --parchment: #EDE8D8;
+    --charcoal: #2C2C2C;
+    --dark-soil: #3A2E24;
+    --stone: #666666;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Source Sans 3', sans-serif; background: var(--linen); color: var(--charcoal); line-height: 1.7; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 0.75rem 2rem; display: flex; justify-content: space-between; align-items: center; background: rgba(26,58,10,0.97); backdrop-filter: blur(10px); box-shadow: 0 2px 20px rgba(0,0,0,0.2); }
+  .nav-logo { font-family: 'Playfair Display', serif; color: var(--wheat); font-size: 1.15rem; font-weight: 700; text-decoration: none; }
+  .nav-top-links { display: flex; align-items: center; gap: 0; }
+  .nav-top-links a { color: var(--cream); text-decoration: none; margin-left: 1.5rem; font-size: 0.9rem; opacity: 0.85; transition: opacity 0.3s; }
+  .nav-top-links a:hover, .nav-top-links a.active { opacity: 1; color: var(--wheat); }
+  .menu-btn { background: none; border: 1px solid rgba(245,240,224,0.3); border-radius: 8px; padding: 0.4rem 0.9rem; color: var(--cream); font-family: 'Source Sans 3', sans-serif; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; margin-left: 1.5rem; transition: all 0.3s; }
+  .menu-btn:hover { border-color: var(--wheat); color: var(--wheat); }
+  .menu-btn svg { width: 16px; height: 16px; }
+  .menu-btn.open { background: rgba(245,240,224,0.1); border-color: var(--wheat); }
+  .nav-dropdown { display: none; position: absolute; top: 100%; right: 1rem; background: var(--forest); border: 1px solid rgba(245,240,224,0.1); border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.3); padding: 1rem 0; min-width: 220px; }
+  .nav-dropdown.open { display: block; }
+  .nav-dropdown .dd-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sage); padding: 0.5rem 1.25rem 0.25rem; }
+  .nav-dropdown a { display: block; color: var(--cream); text-decoration: none; padding: 0.5rem 1.25rem; font-size: 0.95rem; transition: background 0.2s; }
+  .nav-dropdown a:hover { background: rgba(245,240,224,0.07); color: var(--wheat); }
+  .nav-dropdown a.active { color: var(--wheat); font-weight: 600; }
+  .nav-dropdown .dd-sep { height: 1px; background: rgba(245,240,224,0.08); margin: 0.5rem 0; }
+  @media (max-width: 768px) {
+    .nav-top-links { display: none; }
+    .nav-dropdown { left: 1rem; right: 1rem; min-width: unset; }
+  }
+
+  /* HERO */
+  .hero { background: linear-gradient(170deg, var(--forest) 0%, var(--dark-soil) 100%); padding: 8rem 2rem 4rem; text-align: center; }
+  .hero h1 { font-family: 'Playfair Display', serif; color: var(--cream); font-size: 2.8rem; margin-bottom: 0.5rem; }
+  .hero p { color: rgba(245,240,224,0.7); font-size: 1.15rem; max-width: 650px; margin: 0 auto; }
+  .hero .label { color: var(--sage); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 1rem; display: block; }
+
+  /* TIMELINE */
+  .timeline-section { max-width: 800px; margin: -2rem auto 0; padding: 0 1.5rem 4rem; position: relative; z-index: 10; }
+  .timeline-intro { background: white; border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,0.1); padding: 2.5rem; margin-bottom: 3rem; }
+  .timeline-intro h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 0.75rem; color: var(--earth-green); }
+  .timeline-intro p { color: var(--stone); font-size: 1.05rem; }
+
+  .timeline { position: relative; padding-left: 3rem; }
+  .timeline::before { content: ''; position: absolute; left: 14px; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--moss), var(--wheat), var(--clay)); border-radius: 2px; }
+
+  .entry { position: relative; margin-bottom: 2.5rem; }
+  .entry-dot { position: absolute; left: -3rem; top: 0.35rem; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: white; z-index: 2; }
+  .entry-dot.phase-research { background: var(--moss); }
+  .entry-dot.phase-build { background: var(--warm-brown); }
+  .entry-dot.phase-legal { background: var(--gold); }
+  .entry-dot.phase-community { background: var(--earth-green); }
+  .entry-dot.phase-future { background: var(--sage); border: 2px dashed var(--moss); color: var(--moss); background: var(--cream); }
+
+  .entry-card { background: white; border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.07); padding: 1.75rem; transition: transform 0.3s, box-shadow 0.3s; }
+  .entry-card:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(0,0,0,0.1); }
+  .entry-date { font-size: 0.8rem; color: var(--stone); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0.35rem; }
+  .entry-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--charcoal); margin-bottom: 0.5rem; }
+  .entry-body { color: var(--stone); font-size: 0.95rem; line-height: 1.7; }
+  .entry-body p { margin-bottom: 0.75rem; }
+  .entry-body p:last-child { margin-bottom: 0; }
+  .entry-tag { display: inline-block; background: rgba(74,122,58,0.1); color: var(--moss); font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 6px; margin-top: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+  .entry-tag.legal { background: rgba(139,125,60,0.1); color: var(--gold); }
+  .entry-tag.build { background: rgba(107,58,42,0.1); color: var(--warm-brown); }
+  .entry-tag.community { background: rgba(45,80,22,0.1); color: var(--earth-green); }
+  .entry-tag.future { background: rgba(122,155,109,0.1); color: var(--sage); }
+
+  .entry-future .entry-card { border: 2px dashed var(--parchment); background: rgba(255,255,255,0.6); }
+  .entry-future .entry-title { color: var(--stone); }
+
+  /* LEGEND */
+  .legend { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2rem; padding: 1rem 0; }
+  .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--stone); }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+
+  /* CTA */
+  .diary-cta { background: white; border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,0.1); padding: 2.5rem; text-align: center; margin-top: 2rem; }
+  .diary-cta h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .diary-cta p { color: var(--stone); margin-bottom: 1.5rem; }
+  .diary-cta a { display: inline-block; background: var(--moss); color: white; padding: 0.75rem 2rem; border-radius: 10px; text-decoration: none; font-weight: 600; transition: background 0.3s; }
+  .diary-cta a:hover { background: var(--earth-green); }
+
+  /* FOOTER */
+  .footer { background: var(--forest); color: var(--cream); padding: 3rem 2rem; text-align: center; margin-top: 4rem; }
+  .footer a { color: var(--sage); text-decoration: none; margin: 0 1rem; font-size: 0.9rem; }
+  .footer a:hover { color: var(--wheat); }
+  .footer p { font-size: 0.75rem; opacity: 0.4; margin-top: 1.5rem; }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 2rem; }
+    .nav-links { display: none; }
+    .timeline { padding-left: 2.5rem; }
+    .entry-dot { left: -2.5rem; width: 28px; height: 28px; font-size: 0.7rem; }
+    .legend { flex-direction: column; gap: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Sovereign Misfit Farm</a>
+  <div class="nav-top-links">
+    <a href="index.html">Home</a>
+    <a href="apply.html">Apply</a>
+    <a href="farmer-legacy.html">Farmer Legacy</a>
+    <a href="build-diary.html" class="active">Build Diary</a>
+    <button class="menu-btn" onclick="document.querySelector('.nav-dropdown').classList.toggle('open');this.classList.toggle('open')">
+      <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      More
+    </button>
+  </div>
+  <div class="nav-dropdown">
+    <div class="dd-label">Explore</div>
+    <a href="community-map.html">Interactive Map</a>
+    <a href="resources.html">Resources</a>
+    <div class="dd-sep"></div>
+    <div class="dd-label">Tools</div>
+    <a href="calculator.html">Land Calculator</a>
+    <a href="land-scout.html">Land Scout</a>
+    <a href="catalyst-model.html">The Catalyst Model</a>
+    <a href="farmer-legacy.html">Farmer Legacy</a>
+    <a href="apply.html">Household Application</a>
+    <div class="dd-sep"></div>
+    <div class="dd-label">Follow Along</div>
+    <a href="build-diary.html" class="active">Build Diary</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <span class="label">Proof of Work</span>
+  <h1>Build Diary</h1>
+  <p>This isn't a polished pitch. It's a transparent record of building a community land trust from scratch — the research, the numbers, the dead ends, and the progress. Updated as it happens.</p>
+</section>
+
+<div class="timeline-section">
+
+  <div class="timeline-intro">
+    <h2>Why publish this?</h2>
+    <p>Every intentional community website looks like a finished product. Ours isn't — and we think that honesty is a feature. This diary shows the real work behind the vision: scouting land, running numbers, learning what we don't know, and adjusting the model based on what we find. If you're thinking about starting your own community, this is what the early days actually look like.</p>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--moss)"></div> Research</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div> Legal & Financial</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--warm-brown)"></div> Land & Build</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--earth-green)"></div> Community</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--cream); border: 2px dashed var(--moss)"></div> Upcoming</div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="entry">
+      <div class="entry-dot phase-research">1</div>
+      <div class="entry-card">
+        <div class="entry-date">January 2026</div>
+        <div class="entry-title">The Model Takes Shape</div>
+        <div class="entry-body">
+          <p>Started with a question: what would it take for twelve families to own land together without anyone losing their autonomy? Spent weeks researching community land trusts, cohousing models, and why intentional communities fail. Read everything from the Fellowship for Intentional Community archives to CLT legal structures used in Burlington, VT and Irvine, CA.</p>
+          <p>Key decision: the 501(c)(2) CLT model gives us the legal framework we need — the trust holds the land, households hold 99-year ground leases, and nobody can speculate their way into control.</p>
+        </div>
+        <span class="entry-tag">Research</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-dot phase-research">2</div>
+      <div class="entry-card">
+        <div class="entry-date">February 2026</div>
+        <div class="entry-title">Governance Framework & Hard Truths</div>
+        <div class="entry-body">
+          <p>Drafted the governance model. Studied what went wrong at Twin Oaks, the Farm, and a dozen communities that dissolved over money or power. Built in the structural safeguards: term limits, financial transparency, external ombudsperson, four-step conflict resolution, annual cult check against the ICSA checklist.</p>
+          <p>Wrote the Hard Truths section. If we can't be honest about the trade-offs — tight money, cameras in shared spaces, firearm policy — we'll attract the wrong people and lose the right ones.</p>
+        </div>
+        <span class="entry-tag">Research</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-dot phase-build">3</div>
+      <div class="entry-card">
+        <div class="entry-date">February – March 2026</div>
+        <div class="entry-title">Website & Open-Source Tools</div>
+        <div class="entry-body">
+          <p>Built the website and all the tools: land calculator, interactive community map, Land Scout (pre-filtered search across six verified listing sites), Catalyst Model playbook, and household application with matching algorithm. Everything is open-source — if someone wants to fork the model and build their own community, that's the whole point.</p>
+          <p>Published the Starter Guide and Catalyst Playbook as downloadable documents. Made the financial models transparent so anyone can run the numbers themselves.</p>
+        </div>
+        <span class="entry-tag build">Build</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-dot phase-build">4</div>
+      <div class="entry-card">
+        <div class="entry-date">March 2026</div>
+        <div class="entry-title">Land Scouting Begins</div>
+        <div class="entry-body">
+          <p>Started actively scouting land using our own Land Scout tool. Focusing on western North Carolina — Watauga, Ashe, and Avery counties in the Blue Ridge Mountains. Found promising parcels near Blowing Rock with infrastructure already in place (underground power, fiber optic, completed roads). Running each prospect through the land calculator to check viability for 12 households.</p>
+          <p>Learning: "recreational property" listings often have the acreage and privacy we need, but mountain terrain means careful evaluation of build sites, septic capacity, and winter road access. Every parcel gets checked against USDA Web Soil Survey and county zoning records.</p>
+        </div>
+        <span class="entry-tag build">Land Scouting</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-dot phase-community">5</div>
+      <div class="entry-card">
+        <div class="entry-date">March 2026</div>
+        <div class="entry-title">Feedback & Model Refinement</div>
+        <div class="entry-body">
+          <p>Shared the model publicly and got serious structural feedback. Made significant changes: replaced "matriarchal governance" framing with "vulnerability-first governance" (same principles, wider appeal), added a defined 6-month trial residency so people don't have to bet their savings on a feeling, spelled out the exit equity mechanism in detail, added a four-step conflict resolution path, and reframed the income model to explicitly support hybrid earning (not everyone needs to be a farmer).</p>
+          <p>The feedback process validated something important: the model is stronger when it's specific. Vague promises about "equity" and "conflict resolution" erode trust. Concrete mechanisms build it.</p>
+        </div>
+        <span class="entry-tag community">Community</span>
+      </div>
+    </div>
+
+    <div class="entry entry-future">
+      <div class="entry-dot phase-future">—</div>
+      <div class="entry-card">
+        <div class="entry-date">2026 – 2028</div>
+        <div class="entry-title">WWOOFing: Lived Experience Before Leading</div>
+        <div class="entry-body">
+          <p>The mystery mind behind this framework isn't building from a desk. Before asking twelve households to bet on a vision, she's going to live it — WWOOFing (World Wide Opportunities on Organic Farms) across working farms, intentional communities, and homesteads to gather the lived experience that no amount of research can replace.</p>
+          <p>The goals are specific: understand the real hardships of communal farming life firsthand, capture the ingenuity that experienced communities have developed through decades of trial and error, scout land and regions with the right combination of soil, zoning, and culture, and start building the network of people who might one day become the first twelve. This isn't a gap year — it's field research with dirt under the fingernails.</p>
+          <p>Realistic timeline: 2–5 years before the first circle of twelve is assembled and land is purchased. The model is ready. The tools are built. Now comes the part you can't rush — earning the credibility to ask people to trust you with their family's future.</p>
+        </div>
+        <span class="entry-tag future">The Road Ahead</span>
+      </div>
+    </div>
+
+    <div class="entry entry-future">
+      <div class="entry-dot phase-future">—</div>
+      <div class="entry-card">
+        <div class="entry-date">Along the Way</div>
+        <div class="entry-title">County Planning Conversations</div>
+        <div class="entry-body">
+          <p>Contact Watauga County planning department to discuss CLT zoning requirements for multi-dwelling parcels. Key questions: maximum dwelling units per parcel, septic requirements for 12 households, and whether the CLT model requires special use permits.</p>
+        </div>
+        <span class="entry-tag future">Upcoming</span>
+      </div>
+    </div>
+
+    <div class="entry entry-future">
+      <div class="entry-dot phase-future">—</div>
+      <div class="entry-card">
+        <div class="entry-date">Along the Way</div>
+        <div class="entry-title">Legal Structure & 501(c)(2) Filing</div>
+        <div class="entry-body">
+          <p>Engage a CLT-experienced attorney to draft articles of incorporation, bylaws, and the ground lease template. File for 501(c)(2) tax-exempt status. Estimated timeline: 3–6 months for IRS determination.</p>
+        </div>
+        <span class="entry-tag future">Upcoming</span>
+      </div>
+    </div>
+
+    <div class="entry entry-future">
+      <div class="entry-dot phase-future">—</div>
+      <div class="entry-card">
+        <div class="entry-date">Along the Way</div>
+        <div class="entry-title">First Site Visits & Soil Testing</div>
+        <div class="entry-body">
+          <p>Schedule in-person visits to the top 3 land prospects. Bring a percolation test kit, walk the build sites, check the road in rain, talk to the neighbors. Visit during the worst weather we can manage — land that looks good in sunshine needs to look viable in mud.</p>
+        </div>
+        <span class="entry-tag future">Upcoming</span>
+      </div>
+    </div>
+
+  </div><!-- /timeline -->
+
+  <div class="diary-cta">
+    <h2>Want to follow along?</h2>
+    <p>Drop your email and we'll send diary updates as milestones happen. No spam, no sales funnel — just real progress reports from the build.</p>
+    <a href="index.html#connect">Get Updates</a>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div>
+    <a href="index.html">Home</a>
+    <a href="resources.html">Resources</a>
+    <a href="community-map.html">Map</a>
+    <a href="land-scout.html">Land Scout</a>
+    <a href="catalyst-model.html">Catalyst Model</a>
+    <a href="farmer-legacy.html">Farmer Legacy</a>
+    <a href="apply.html">Apply</a>
+    <a href="mailto:info@sovereignmisfitfarm.com">Contact</a>
+  </div>
+  <p>&copy; 2026 Sovereign Misfit Farm Community Land Trust</p>
+</footer>
+</body>
+</html>
